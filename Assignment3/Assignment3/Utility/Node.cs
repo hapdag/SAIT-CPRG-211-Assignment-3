@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Assignment3
 {
-    internal class Node<T>
+    public class Node
     {
-        private Node<T> _next;
-        private T _value;
-        public Node<T> Next { get { return _next; } set { _next = value; } }
-        public T Value { get { return _value; } set { this._value = value; } }
-        public Node(T value) 
+        private Node _next;
+        private User _value;
+        public Node Next { get { return _next; } set { _next = value; } }
+        public User Value { get { return _value; } set { this._value = value; } }
+        public Node(User value) 
         {
             this._value = value;
-            _next = null;
         }
 
     }

@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace Assignment3
 {
-    public class SLL<T> : ILinkedListADT
+    public class SLL : ILinkedListADT
     {
-        private Node<T> _head;
-        private int _count;
+        private Node _head;
+        private int _nodeCount;
+        public Node Head { get { return _head; } }
+
         public SLL() 
         {
+            _head = null;
+            _nodeCount = 0;
         }
         public void Add(User value, int index)
         {
@@ -20,17 +24,42 @@ namespace Assignment3
 
         public void AddFirst(User value)
         {
-            throw new NotImplementedException();
+            Node newNode = new Node(value);
+            if (value == null)
+            {
+                _head = newNode;
+                _head.Next = null;
+            }
+            else
+            {
+                newNode.Next = _head;
+                _head = newNode;
+            }
+            _nodeCount++;
         }
 
         public void AddLast(User value)
         {
-            throw new NotImplementedException();
+            if (_head == null)
+            {
+                AddFirst(value);
+            }
+            else
+            {
+                Node lastNode = _head, newNode =  new Node(value);
+                for (int i  = 0; i < _nodeCount-1; i++)
+                {
+                    lastNode = lastNode.Next;
+                }
+                lastNode.Next = newNode;
+                _nodeCount++;
+            }
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _head = null;
+            _nodeCount = 0;
         }
 
         public bool Contains(User value)
@@ -40,12 +69,31 @@ namespace Assignment3
 
         public int Count()
         {
-            throw new NotImplementedException();
+            return _nodeCount;
         }
 
         public User GetValue(int index)
         {
-            throw new NotImplementedException();
+            if (!IsEmpty())
+            {
+                if(index< _nodeCount)
+                {
+                    Node curNode = _head;
+                    for(int i  = 0; i < index; i++)
+                    {
+                        curNode = curNode.Next;
+                    }
+                    return curNode.Value;
+                }
+                else
+                {
+                    throw new IndexOutOfRangeException();
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public int IndexOf(User value)
@@ -55,7 +103,14 @@ namespace Assignment3
 
         public bool IsEmpty()
         {
-            throw new NotImplementedException();
+            if (_head == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Remove(int index)
@@ -65,12 +120,33 @@ namespace Assignment3
 
         public void RemoveFirst()
         {
-            throw new NotImplementedException();
+            if( !IsEmpty())
+            {
+                _head = _head.Next;
+                _nodeCount--;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public void RemoveLast()
         {
-            throw new NotImplementedException();
+            if(!IsEmpty())
+            {
+                Node secondLastNode = _head;
+                for (int i = 0; i < (_nodeCount - 2); i++)
+                {
+                    secondLastNode = secondLastNode.Next;
+                }
+                secondLastNode.Next = null;
+                _nodeCount--;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public void Replace(User value, int index)
