@@ -98,7 +98,14 @@ namespace Assignment3
 
         public int IndexOf(User value)
         {
-            throw new NotImplementedException();
+            if (!IsEmpty())
+            {
+
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public bool IsEmpty()
@@ -115,7 +122,28 @@ namespace Assignment3
 
         public void Remove(int index)
         {
-            throw new NotImplementedException();
+            if (!IsEmpty())
+            {
+                if (index< _nodeCount)
+                {
+                    Node curNode = _head;
+                    for (int i = 0; i < index-1; i++)
+                    {
+                        curNode = curNode.Next;
+                    }
+                    curNode.Next = curNode.Next.Next;
+                    _nodeCount--;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+
         }
 
         public void RemoveFirst()
