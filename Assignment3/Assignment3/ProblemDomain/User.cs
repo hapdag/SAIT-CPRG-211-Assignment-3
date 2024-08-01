@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+
 
 namespace Assignment3
 {
+    [DataContract]
     public class User : IEquatable<User>
     {
 
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public string Email { get; private set; }
+        [DataMember] public int Id { get; private set; }
+        [DataMember] public string Name { get; private set; }
+        [DataMember] public string Email { get; private set; }
 
-        public string Password { get; private set; }
-
+        [DataMember] public string Password { get; private set; }
+        
+        //for serialization purposes
+        public User() { }
         /// <summary>
         /// Initializes a User object.
         /// </summary>

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Assignment3
 {
+    [DataContract]
     public class SLL : ILinkedListADT
     {
-        private Node _head;
-        private int _nodeCount;
-        public Node Head { get { return _head; } }
+        [DataMember] private Node _head;
+        [DataMember] private int _nodeCount;
 
         public SLL() 
         {
@@ -19,6 +20,21 @@ namespace Assignment3
         }
         public void Add(User value, int index)
         {
+            if (!IsEmpty())
+            {
+                Node curNode = _head, newNode = new Node(value);
+                for(int i  = 0; i < (index - 1); i++)
+                {
+                    curNode = curNode.Next;
+                }
+                newNode.Next = curNode.Next;
+                curNode.Next = newNode;
+                _nodeCount++;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
             throw new NotImplementedException();
         }
 
@@ -64,7 +80,16 @@ namespace Assignment3
 
         public bool Contains(User value)
         {
-            throw new NotImplementedException();
+            Node curNode = _head;
+            for(int i = 0; i < _nodeCount; i++)
+            {
+                if (curNode.Value.Equals(value))
+                {
+                    return true;
+                }
+                curNode = curNode.Next;
+            }
+            return false;
         }
 
         public int Count()
@@ -100,7 +125,18 @@ namespace Assignment3
         {
             if (!IsEmpty())
             {
-
+                Node curNode = _head;
+                int index = -1;
+                for(int i = 0; i < _nodeCount; i++)
+                {
+                    curNode = curNode.Next;
+                    if (curNode.Value.Equals(value))
+                    {
+                        index = i;
+                        return index;
+                    }
+                }
+                return index;
             }
             else
             {
@@ -179,7 +215,27 @@ namespace Assignment3
 
         public void Replace(User value, int index)
         {
-            throw new NotImplementedException();
+            if (!IsEmpty())
+            {
+                if (index < _nodeCount)
+                {
+                    Node curNode = _head, newNode = new Node(value);
+                    for (int i = 0; i < index - 1; i++)
+                    {
+                        curNode = curNode.Next;
+                    }
+                    newNode.Next = curNode.Next.Next;
+                    curNode.Next = newNode;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
