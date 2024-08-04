@@ -35,7 +35,6 @@ namespace Assignment3
             {
                 throw new InvalidOperationException();
             }
-            throw new NotImplementedException();
         }
 
         public void AddFirst(User value)
