@@ -47,5 +47,17 @@ namespace LinkedListTest
             Assert.That(testSLL.GetValue(1).Id.Equals(3));
 
         }
+        [Test]
+        public void Test_Replace()
+        {
+            SLL testSLL = new SLL();
+            testSLL.AddFirst(new User(1, "Joe Blow", "jblow@gmail.com", "password"));
+            testSLL.AddLast(new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef"));
+            testSLL.AddLast(new User(4, "Ronald McDonald", "burgers4life63@outlook.com", "mcdonalds999"));
+            testSLL.Replace(new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", "kfc5555"), 1);
+            // Replace user information at testSLL index 1, new user should have ID of 3
+            Assert.That(testSLL.GetValue(1).Id, Is.EqualTo(3));
+
+        }
     }
 }
