@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
 namespace Assignment3
 {
@@ -12,7 +13,8 @@ namespace Assignment3
     {
         [DataMember] private Node _head;
         [DataMember] private int _nodeCount;
-
+        [DataMember] public Node Head { get { return _head; } set { _head = value; } }
+        [DataMember] public int NodeCount { get; set; }
         public SLL() 
         {
             _head = null;
@@ -235,6 +237,16 @@ namespace Assignment3
             {
                 throw new NotImplementedException();
             }
+        }
+        public void Join(SLL sll)
+        {
+            Node lastNode = _head;
+            for (int i = 0; i < _nodeCount-1; i++)
+            {
+                lastNode = lastNode.Next;
+            }
+            lastNode.Next = sll.Head;
+            _nodeCount += sll.Count();
         }
     }
 }

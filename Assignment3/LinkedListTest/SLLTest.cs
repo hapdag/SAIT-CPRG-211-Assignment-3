@@ -111,5 +111,18 @@ namespace LinkedListTest
             testSLL.AddLast(new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", "kfc5555"));
             Assert.That(testSLL.GetValue(0).Equals(testUser));
         }
+    [Test]
+    public void Test_SLL_Join()
+        {
+            SLL sll1 = new SLL();
+            SLL sll2 = new SLL();
+            sll1.AddLast(new User(1, "Joe Blow", "jblow@gmail.com", "password"));
+            sll1.AddLast(new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef"));
+            sll2.AddLast(new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", "kfc5555"));
+            sll2.AddLast(new User(4, "Ronald McDonald", "burgers4life63@outlook.com", "mcdonalds999"));
+            sll1.Join(sll2);
+            Assert.That(sll1.Count().Equals(4));
+            Assert.That(sll1.GetValue(3).Id.Equals(4));
+        }
     }
 }
