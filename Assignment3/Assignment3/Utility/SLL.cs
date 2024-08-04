@@ -128,12 +128,12 @@ namespace Assignment3
                 int index = -1;
                 for(int i = 0; i < _nodeCount; i++)
                 {
-                    curNode = curNode.Next;
                     if (curNode.Value.Equals(value))
                     {
                         index = i;
                         return index;
                     }
+                    curNode = curNode.Next;
                 }
                 return index;
             }

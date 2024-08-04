@@ -79,5 +79,37 @@ namespace LinkedListTest
             Assert.That(testSLL.Count().Equals(2));
             Assert.That(testSLL.GetValue(1).Id.Equals(2));
         }
+        
+        [Test]
+        public void Test_Remove_At_Index()
+        {
+            SLL testSLL = new SLL();
+            testSLL.AddFirst(new User(1, "Joe Blow", "jblow@gmail.com", "password"));
+            testSLL.AddLast(new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef"));
+            testSLL.AddLast(new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", "kfc5555"));
+            testSLL.Remove(1);
+            Assert.That(testSLL.Count().Equals(2));
+            Assert.That(testSLL.GetValue(1).Id.Equals(3));
+        }
+        [Test]
+        public void Test_Get_Item_Index()
+        {
+            SLL testSLL = new SLL();
+            User testUser = new User(1, "Joe Blow", "jblow@gmail.com", "password");
+            testSLL.AddFirst(new User(1, "Joe Blow", "jblow@gmail.com", "password"));
+            testSLL.AddLast(new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef"));
+            testSLL.AddLast(new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", "kfc5555"));
+            Assert.That(testSLL.IndexOf(testUser).Equals(0));
+        }
+        [Test]
+        public void Test_Get_Value_At_Index()
+        {
+            SLL testSLL = new SLL();
+            User testUser = new User(1, "Joe Blow", "jblow@gmail.com", "password");
+            testSLL.AddFirst(new User(1, "Joe Blow", "jblow@gmail.com", "password"));
+            testSLL.AddLast(new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef"));
+            testSLL.AddLast(new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", "kfc5555"));
+            Assert.That(testSLL.GetValue(0).Equals(testUser));
+        }
     }
 }
